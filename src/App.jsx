@@ -1,6 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Crosshair, ShoppingBag, Sword, Package, Zap, Navigation } from 'lucide-react';
 
+// Guardar progreso
+useEffect(() => {
+  localStorage.setItem('pokeworld_save', JSON.stringify(gameState));
+}, [gameState]);
+
+// Cargar al inicio
+useEffect(() => {
+  const saved = localStorage.getItem('pokeworld_save');
+  if (saved) {
+    setGameState(JSON.parse(saved));
+  }
+}, []);
+
 const PokeWorld = () => {
   const [gameState, setGameState] = useState({
     money: 1000,
